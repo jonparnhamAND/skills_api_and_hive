@@ -25,7 +25,7 @@ class _SearchSkillsState extends State<SearchSkills> {
 
   // Write data to the Hive db
   void writeData() {
-    print('selectedSkills $selectedSkills');
+    // print('selectedSkills $selectedSkills');
     var oldSkills = _myHiveBox.get('skills');
     if (oldSkills != null) {
       var newUpdatedSkills = [...oldSkills, ...selectedSkills];
@@ -91,7 +91,7 @@ class _SearchSkillsState extends State<SearchSkills> {
                                     _searchSkillValue = "";
                                     _controller.clear();
                                   });
-                                  print('selectedSkills--- $selectedSkills');
+                                  // print('selectedSkills--- $selectedSkills');
                                 },
                               );
                             },

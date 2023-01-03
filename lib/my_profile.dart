@@ -21,7 +21,20 @@ class _MyProfileState extends State<MyProfile> {
     jobTitle = _myHiveBox.get('job_title');
     skills = _myHiveBox.get('skills') ?? [];
 
-    print('skills--- $skills');
+    // print('skills--- $skills');
+  }
+
+  _deleteSkill(index) {
+    var currentSkills = _myHiveBox.get('skills');
+    currentSkills.removeAt(index);
+
+    var newUpdatedSkills = [...currentSkills];
+
+    _myHiveBox.put('skills', newUpdatedSkills);
+
+    setState(() {
+      skills = currentSkills;
+    });
   }
 
   @override
@@ -39,8 +52,8 @@ class _MyProfileState extends State<MyProfile> {
           child: Column(
             crossAxisAlignment: CrossAxisAlignment.start,
             children: [
-              Padding(
-                padding: const EdgeInsets.all(8.0),
+              const Padding(
+                padding: EdgeInsets.all(8.0),
                 child: Text(
                   'My Profile',
                   style: TextStyle(fontWeight: FontWeight.w800, fontSize: 25),
@@ -74,9 +87,14 @@ class _MyProfileState extends State<MyProfile> {
                     return Padding(
                       padding: const EdgeInsets.all(8.0),
                       child: ListTile(
+                        trailing: IconButton(
+                            onPressed: () {
+                              _deleteSkill(skillIndex);
+                            },
+                            icon: const Icon(Icons.delete)),
                         tileColor: Colors.blue.shade200,
                         title: Padding(
-                          padding: const EdgeInsets.all(15),
+                          padding: const EdgeInsets.all(8),
                           child: Text(
                             skills[skillIndex],
                           ),
